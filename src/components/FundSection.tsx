@@ -32,7 +32,13 @@ export const FundSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="fund" ref={ref} className="py-section bg-gradient-frontier relative">
+    <section id="fund" ref={ref} className="py-section bg-gradient-frontier relative overflow-hidden">
+      {/* Financial Geometric Elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-10 left-1/4 w-6 h-6 border-2 border-primary rounded-full animate-ping" />
+        <div className="absolute bottom-10 right-1/4 w-8 h-8 bg-primary/20 transform rotate-45 animate-pulse" />
+        <div className="absolute top-1/2 right-10 w-4 h-4 bg-primary-glow rounded-full animate-bounce" />
+      </div>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

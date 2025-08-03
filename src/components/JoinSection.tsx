@@ -82,7 +82,22 @@ export const JoinSection = () => {
   };
 
   return (
-    <section id="join" ref={ref} className="py-section bg-background relative">
+    <section id="join" ref={ref} className="py-section bg-background relative overflow-hidden">
+      {/* Network Connection Visuals */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-20 w-2 h-2 bg-primary rounded-full animate-pulse" />
+        <div className="absolute top-32 left-40 w-1 h-1 bg-primary-glow rounded-full animate-ping" />
+        <div className="absolute bottom-40 right-32 w-3 h-3 border border-primary rounded-full animate-spin" style={{ animationDuration: '10s' }} />
+        <svg className="absolute inset-0 w-full h-full" style={{ filter: 'blur(1px)' }}>
+          <defs>
+            <pattern id="network" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <circle cx="20" cy="20" r="1" fill="hsl(var(--primary))" opacity="0.1" />
+              <line x1="20" y1="20" x2="80" y2="80" stroke="hsl(var(--primary))" strokeWidth="0.5" opacity="0.1" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#network)" />
+        </svg>
+      </div>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

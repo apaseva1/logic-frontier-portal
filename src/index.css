@@ -131,18 +131,66 @@
 }
 
 @layer components {
-  /* Logic Grid Background */
+  /* Geometric Grid Pattern */
   .logic-grid {
     background-image: 
-      linear-gradient(hsl(var(--border)) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px);
-    background-size: 2rem 2rem;
-    opacity: 0.5;
+      linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+      linear-gradient(rgba(139, 92, 246, 0.01) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139, 92, 246, 0.01) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+    animation: grid-float 20s ease-in-out infinite;
   }
   
-  /* GILC Logo Animation */
+  /* Animated Geometric Shapes */
+  .geometric-float {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .geometric-float::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px solid hsl(var(--primary) / 0.2);
+    border-radius: 50%;
+    animation: geometric-pulse 4s ease-in-out infinite;
+  }
+
+  .geometric-float::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(45deg, hsl(var(--primary) / 0.1), hsl(var(--primary-glow) / 0.1));
+    transform: rotate(45deg);
+    animation: geometric-rotate 8s linear infinite;
+  }
+  
+  /* Enhanced GILC Logo Animation */
   .gilc-logo {
     @apply transition-transform duration-500 ease-out;
+    position: relative;
+  }
+
+  .gilc-logo::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .gilc-logo:hover::before {
+    opacity: 0.2;
+    animation: pulse-glow 2s ease-in-out infinite;
   }
   
   .gilc-logo:hover {
@@ -153,17 +201,69 @@
   /* Scientific Section Reveal */
   .section-reveal {
     @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+    animation: section-reveal 0.8s ease-out forwards;
   }
   
   .section-reveal.revealed {
     @apply opacity-100 translate-y-0;
   }
   
-  /* Proof Highlight */
+  /* Enhanced Proof Highlight */
   .proof-block {
-    @apply bg-proof-bg border border-proof-border rounded-lg p-6;
-    background: hsl(var(--proof-bg));
-    border-color: hsl(var(--proof-border));
+    background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted) / 0.3));
+    border: 1px solid hsl(var(--border));
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .proof-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      hsl(var(--primary)), 
+      hsl(var(--primary-glow)), 
+      hsl(var(--primary))
+    );
+    background-size: 200% 100%;
+    animation: gradient-flow 3s ease-in-out infinite;
+  }
+
+  .morphing-particle {
+    animation: morphing-shape 8s ease-in-out infinite;
+  }
+
+  .particle-system {
+    position: relative;
+  }
+
+  .particle-system::before,
+  .particle-system::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    animation: particle-float 6s ease-in-out infinite;
+    opacity: 0.3;
+  }
+
+  .particle-system::before {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+  }
+
+  .particle-system::after {
+    bottom: 20%;
+    right: 20%;
+    animation-delay: 3s;
   }
   
   /* Glow Effects */
@@ -234,17 +334,20 @@
   }
 }
 
+/* Advanced Animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
 }
 
 @keyframes pulse-glow {
   0%, 100% { 
-    box-shadow: 0 0 1rem hsl(var(--primary-glow) / 0.3);
+    box-shadow: 0 0 5px hsl(var(--primary) / 0.3);
+    transform: scale(1);
   }
   50% { 
-    box-shadow: 0 0 2rem hsl(var(--primary-glow) / 0.6);
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.6);
+    transform: scale(1.05);
   }
 }
 
@@ -260,4 +363,73 @@
     width: 100%;
     opacity: 1;
   }
+}
+
+@keyframes section-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes grid-float {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, -2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-2px, 2px); }
+}
+
+@keyframes geometric-pulse {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+    border-color: hsl(var(--primary) / 0.2);
+  }
+  50% { 
+    transform: scale(1.2) rotate(180deg);
+    border-color: hsl(var(--primary) / 0.4);
+  }
+}
+
+@keyframes geometric-rotate {
+  from { transform: rotate(45deg); }
+  to { transform: rotate(405deg); }
+}
+
+@keyframes particle-float {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: translate(-10px, -15px) scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes morphing-shape {
+  0%, 100% { 
+    border-radius: 50% 50% 50% 50%;
+    transform: rotate(0deg);
+  }
+  25% { 
+    border-radius: 60% 40% 60% 40%;
+    transform: rotate(90deg);
+  }
+  50% { 
+    border-radius: 40% 60% 40% 60%;
+    transform: rotate(180deg);
+  }
+  75% { 
+    border-radius: 50% 50% 60% 40%;
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes gradient-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }

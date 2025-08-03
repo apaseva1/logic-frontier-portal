@@ -31,7 +31,13 @@ export const AboutSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" ref={ref} className="py-section bg-gradient-frontier relative">
+    <section id="about" ref={ref} className="py-section bg-gradient-frontier relative overflow-hidden">
+      {/* Geometric Background Elements */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 left-10 w-32 h-32 border border-primary/20 rounded-full animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-24 h-24 border-2 border-primary-glow/30 transform rotate-45" />
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-primary/5 rounded-full animate-bounce" style={{ animationDuration: '4s' }} />
+      </div>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

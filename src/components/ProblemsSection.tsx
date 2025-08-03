@@ -74,7 +74,13 @@ export const ProblemsSection = () => {
   };
 
   return (
-    <section id="problems" ref={ref} className="py-section bg-background relative">
+    <section id="problems" ref={ref} className="py-section bg-background relative overflow-hidden">
+      {/* Animated Grid Background */}
+      <div className="absolute inset-0 logic-grid opacity-50" />
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-16 right-16 w-20 h-20 border border-primary/10 rounded-lg animate-spin" style={{ animationDuration: '20s' }} />
+        <div className="absolute bottom-16 left-16 w-12 h-12 bg-primary/5 rounded-full animate-pulse" />
+      </div>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

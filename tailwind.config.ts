@@ -89,12 +89,18 @@ export default {
 					to: { height: '0' }
 				},
 				'float': {
-					'0%, 100%': { transform: 'translateY(0px)' },
-					'50%': { transform: 'translateY(-10px)' }
+					'0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+					'50%': { transform: 'translateY(-20px) rotate(180deg)' }
 				},
 				'pulse-glow': {
-					'0%, 100%': { boxShadow: '0 0 1rem hsl(var(--primary-glow) / 0.3)' },
-					'50%': { boxShadow: '0 0 2rem hsl(var(--primary-glow) / 0.6)' }
+					'0%, 100%': { 
+						boxShadow: '0 0 5px hsl(var(--primary) / 0.3)',
+						transform: 'scale(1)'
+					},
+					'50%': { 
+						boxShadow: '0 0 30px hsl(var(--primary) / 0.6)',
+						transform: 'scale(1.05)'
+					}
 				},
 				'type-draw': {
 					'0%': { width: '0', opacity: '0' },
@@ -102,17 +108,75 @@ export default {
 					'100%': { width: '100%', opacity: '1' }
 				},
 				'section-reveal': {
-					'0%': { opacity: '0', transform: 'translateY(2rem)' },
-					'100%': { opacity: '1', transform: 'translateY(0)' }
+					'0%': { opacity: '0', transform: 'translateY(50px) scale(0.95)' },
+					'100%': { opacity: '1', transform: 'translateY(0) scale(1)' }
+				},
+				'grid-float': {
+					'0%, 100%': { transform: 'translate(0, 0)' },
+					'25%': { transform: 'translate(-2px, -2px)' },
+					'50%': { transform: 'translate(2px, -2px)' },
+					'75%': { transform: 'translate(-2px, 2px)' }
+				},
+				'geometric-pulse': {
+					'0%, 100%': { 
+						transform: 'scale(1) rotate(0deg)',
+						borderColor: 'hsl(var(--primary) / 0.2)'
+					},
+					'50%': { 
+						transform: 'scale(1.2) rotate(180deg)',
+						borderColor: 'hsl(var(--primary) / 0.4)'
+					}
+				},
+				'geometric-rotate': {
+					'from': { transform: 'rotate(45deg)' },
+					'to': { transform: 'rotate(405deg)' }
+				},
+				'particle-float': {
+					'0%, 100%': { 
+						transform: 'translate(0, 0) scale(1)',
+						opacity: '0.3'
+					},
+					'50%': { 
+						transform: 'translate(-10px, -15px) scale(1.1)',
+						opacity: '0.7'
+					}
+				},
+				'morphing-shape': {
+					'0%, 100%': { 
+						borderRadius: '50% 50% 50% 50%',
+						transform: 'rotate(0deg)'
+					},
+					'25%': { 
+						borderRadius: '60% 40% 60% 40%',
+						transform: 'rotate(90deg)'
+					},
+					'50%': { 
+						borderRadius: '40% 60% 40% 60%',
+						transform: 'rotate(180deg)'
+					},
+					'75%': { 
+						borderRadius: '50% 50% 60% 40%',
+						transform: 'rotate(270deg)'
+					}
+				},
+				'gradient-flow': {
+					'0%, 100%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'float': 'float 6s ease-in-out infinite',
-				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+				'float': 'float 4s ease-in-out infinite',
+				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
 				'type-draw': 'type-draw 2s ease-out forwards',
-				'section-reveal': 'section-reveal 0.7s ease-out forwards'
+				'section-reveal': 'section-reveal 0.8s ease-out forwards',
+				'grid-float': 'grid-float 20s ease-in-out infinite',
+				'geometric-pulse': 'geometric-pulse 4s ease-in-out infinite',
+				'geometric-rotate': 'geometric-rotate 8s linear infinite',
+				'particle-float': 'particle-float 6s ease-in-out infinite',
+				'morphing-shape': 'morphing-shape 8s ease-in-out infinite',
+				'gradient-flow': 'gradient-flow 3s ease-in-out infinite'
 			},
 			spacing: {
 				'section': 'var(--section-padding)',

@@ -22,10 +22,21 @@ export const HeroSection = () => {
         />
         <div className="absolute inset-0 bg-gradient-hero" />
         <div className="logic-grid absolute inset-0" />
+        
+        {/* Geometric Floating Elements */}
+        <div className="absolute top-10 left-10 geometric-float opacity-30" />
+        <div className="absolute top-32 right-20 geometric-float opacity-40" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-40 left-32 geometric-float opacity-35" style={{ animationDelay: '4s' }} />
+        <div className="absolute bottom-20 right-10 geometric-float opacity-30" style={{ animationDelay: '6s' }} />
+        
+        {/* Morphing Particles */}
+        <div className="absolute top-1/4 left-1/4 w-8 h-8 bg-primary/10 morphing-particle" />
+        <div className="absolute top-1/3 right-1/3 w-6 h-6 bg-primary-glow/15 morphing-particle" style={{ animationDelay: '3s' }} />
+        <div className="absolute bottom-1/3 left-1/2 w-10 h-10 bg-primary/5 morphing-particle" style={{ animationDelay: '6s' }} />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative z-10 container mx-auto px-4 text-center particle-system">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,29 +119,81 @@ export const HeroSection = () => {
             </Button>
           </motion.div>
 
-          {/* Floating Elements */}
-          <div className="absolute top-20 left-10 opacity-30">
+          {/* Enhanced Floating Elements with Geometry */}
+          <div className="absolute top-16 left-8 opacity-40">
             <motion.div
-              className="w-3 h-3 bg-primary rounded-full"
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            />
+              className="relative"
+              animate={{ 
+                y: [0, -25, 0], 
+                rotate: [0, 360],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ 
+                duration: 6, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                times: [0, 0.5, 1]
+              }}
+            >
+              <div className="w-4 h-4 bg-primary rounded-full" />
+              <div className="absolute inset-0 w-4 h-4 border-2 border-primary rounded-full animate-ping" />
+            </motion.div>
           </div>
           
-          <div className="absolute top-40 right-20 opacity-30">
+          <div className="absolute top-48 right-16 opacity-35">
             <motion.div
-              className="w-2 h-2 bg-primary-glow rounded-full"
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            />
+              className="relative"
+              animate={{ 
+                y: [0, -20, 0],
+                x: [0, 10, 0],
+                rotate: [0, -180, 0]
+              }}
+              transition={{ 
+                duration: 5, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 1.5 
+              }}
+            >
+              <div className="w-3 h-3 bg-primary-glow rounded-full" />
+              <div className="absolute -inset-1 border border-primary-glow rounded-full animate-pulse" />
+            </motion.div>
           </div>
 
-          <div className="absolute bottom-40 left-20 opacity-30">
+          <div className="absolute bottom-32 left-16 opacity-45">
             <motion.div
-              className="w-4 h-4 border-2 border-primary rounded-full"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            />
+              className="relative"
+              animate={{ 
+                rotate: [0, 360],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ 
+                duration: 8, 
+                repeat: Infinity, 
+                ease: "linear" 
+              }}
+            >
+              <div className="w-6 h-6 border-2 border-primary rounded-full" />
+              <div className="absolute inset-1 w-2 h-2 bg-primary rounded-full" />
+            </motion.div>
+          </div>
+
+          <div className="absolute bottom-16 right-24 opacity-30">
+            <motion.div
+              animate={{ 
+                y: [0, -15, 0],
+                rotate: [0, 45, 90, 135, 180],
+                scale: [1, 0.9, 1.1, 0.95, 1]
+              }}
+              transition={{ 
+                duration: 7, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 3 
+              }}
+            >
+              <div className="w-5 h-5 border-2 border-primary-glow transform rotate-45" />
+            </motion.div>
           </div>
         </motion.div>
       </div>
