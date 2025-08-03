@@ -32,7 +32,7 @@ export const FundSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-section bg-gradient-frontier relative">
+    <section id="fund" ref={ref} className="py-section bg-gradient-frontier relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

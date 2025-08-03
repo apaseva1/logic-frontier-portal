@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe, Brain, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,25 +6,22 @@ import { cn } from '@/lib/utils';
 
 interface NavItem {
   name: string;
-  href: string;
+  sectionId: string;
   icon?: React.ReactNode;
 }
 
 const mainNavItems: NavItem[] = [
-  { name: 'Home', href: '/' },
-  { name: 'About GILC', href: '/about' },
-  { name: 'Problems', href: '/problems', icon: <FileText className="w-4 h-4" /> },
-  { name: 'Proofs', href: '/proofs', icon: <Brain className="w-4 h-4" /> },
-  { name: 'Fund', href: '/fund' },
-  { name: 'DAO Portal', href: '/dao' },
-  { name: 'Join', href: '/join' },
+  { name: 'Home', sectionId: 'hero' },
+  { name: 'About GILC', sectionId: 'about' },
+  { name: 'Problems', sectionId: 'problems', icon: <FileText className="w-4 h-4" /> },
+  { name: 'Fund', sectionId: 'fund' },
+  { name: 'Join', sectionId: 'join' },
 ];
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [language, setLanguage] = useState<'EN' | 'BG'>('EN');
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,8 +36,12 @@ export const Navigation = () => {
     setLanguage(prev => prev === 'EN' ? 'BG' : 'EN');
   };
 
-  const isActivePath = (path: string) => {
-    return location.pathname === path;
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
   };
 
   return (
@@ -59,7 +59,7 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* GILC Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
+          <button onClick={() => scrollToSection('hero')} className="flex items-center space-x-3 group">
             <motion.div
               className="gilc-logo"
               whileHover={{ rotate: 180 }}
@@ -73,26 +73,21 @@ export const Navigation = () => {
               <h1 className="font-semibold text-lg text-foreground">GILC</h1>
               <p className="text-xs text-muted-foreground -mt-1">New Millennium Frontier</p>
             </div>
-          </Link>
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             {mainNavItems.map((item) => (
-              <Link
+              <button
                 key={item.name}
-                to={item.href}
-                className={cn(
-                  "nav-link text-sm font-medium transition-colors",
-                  isActivePath(item.href)
-                    ? "text-primary active"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
+                onClick={() => scrollToSection(item.sectionId)}
+                className="nav-link text-sm font-medium transition-colors text-muted-foreground hover:text-foreground"
               >
                 <div className="flex items-center space-x-2">
                   {item.icon}
                   <span>{item.name}</span>
                 </div>
-              </Link>
+              </button>
             ))}
           </nav>
 
@@ -150,22 +145,16 @@ export const Navigation = () => {
           >
             <nav className="container mx-auto px-4 py-4 space-y-4">
               {mainNavItems.map((item) => (
-                <Link
+                <button
                   key={item.name}
-                  to={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "block py-2 px-4 rounded-md transition-colors",
-                    isActivePath(item.href)
-                      ? "bg-accent text-accent-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                  )}
+                  onClick={() => scrollToSection(item.sectionId)}
+                  className="block py-2 px-4 rounded-md transition-colors text-muted-foreground hover:text-foreground hover:bg-muted w-full text-left"
                 >
                   <div className="flex items-center space-x-3">
                     {item.icon}
                     <span>{item.name}</span>
                   </div>
-                </Link>
+                </button>
               ))}
               
               <div className="pt-4 border-t border-border flex items-center justify-between">

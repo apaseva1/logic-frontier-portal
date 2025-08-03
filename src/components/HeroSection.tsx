@@ -1,12 +1,19 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, FileText, Brain, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+
 import heroImage from '@/assets/hero-logic-pattern.jpg';
 
 export const HeroSection = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <div 
@@ -69,39 +76,36 @@ export const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.1 }}
           >
-            <Link to="/problems">
-              <Button 
-                size="lg" 
-                className="group glow-hover bg-primary hover:bg-primary-deep text-primary-foreground px-8 py-6 text-lg"
-              >
-                <FileText className="w-5 h-5 mr-2" />
-                Explore Problems
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            <Button 
+              onClick={() => scrollToSection('problems')}
+              size="lg" 
+              className="group glow-hover bg-primary hover:bg-primary-deep text-primary-foreground px-8 py-6 text-lg"
+            >
+              <FileText className="w-5 h-5 mr-2" />
+              Explore Problems
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
 
-            <Link to="/proofs">
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="group border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-6 text-lg"
-              >
-                <Brain className="w-5 h-5 mr-2" />
-                View Proofs
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            <Button 
+              onClick={() => scrollToSection('fund')}
+              variant="outline" 
+              size="lg"
+              className="group border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-6 text-lg"
+            >
+              <Brain className="w-5 h-5 mr-2" />
+              Support Research
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
 
-            <Link to="/dao">
-              <Button 
-                variant="ghost" 
-                size="lg"
-                className="group text-muted-foreground hover:text-primary px-8 py-6 text-lg"
-              >
-                <Zap className="w-5 h-5 mr-2" />
-                DAO Portal
-              </Button>
-            </Link>
+            <Button 
+              onClick={() => scrollToSection('join')}
+              variant="ghost" 
+              size="lg"
+              className="group text-muted-foreground hover:text-primary px-8 py-6 text-lg"
+            >
+              <Zap className="w-5 h-5 mr-2" />
+              Join GILC
+            </Button>
           </motion.div>
 
           {/* Floating Elements */}
