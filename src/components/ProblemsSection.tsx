@@ -192,11 +192,7 @@ export const ProblemsSection = () => {
                     </div>
 
                     {/* Action Button */}
-                    <Button 
-                      className="w-full group" 
-                      variant="outline"
-                      onClick={() => window.location.href = `/problem/${problem.id}`}
-                    >
+                    <Button className="w-full group" variant="outline">
                       <FileText className="w-4 h-4 mr-2" />
                       View Problem
                       <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
