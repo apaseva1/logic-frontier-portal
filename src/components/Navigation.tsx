@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe, Brain, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useGPTSystem } from '@/hooks/useGPTSystem';
 
 interface NavItem {
   name: string;
@@ -22,6 +23,7 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [language, setLanguage] = useState<'EN' | 'BG'>('EN');
+  const { openShell } = useGPTSystem();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -115,6 +117,7 @@ export const Navigation = () => {
             <Button
               variant="outline"
               size="sm"
+              onClick={() => openShell('general')}
               className="hidden sm:flex items-center space-x-2 h-8 glow-hover"
             >
               <Brain className="w-4 h-4" />
@@ -171,6 +174,7 @@ export const Navigation = () => {
                 <Button
                   variant="outline"
                   size="sm"
+                  onClick={() => openShell('general')}
                   className="flex items-center space-x-2"
                 >
                   <Brain className="w-4 h-4" />

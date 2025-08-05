@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { GPTExplainerButton } from './gpt/GPTExplainerButton';
+import { useGPTSystem } from '@/hooks/useGPTSystem';
 
 const problemCategories = [
   'Foundation', 'Geometry', 'AI Ethics', 'Number Theory', 'Topology', 'Logic', 'Cybernetics'
@@ -55,6 +57,7 @@ export const ProblemsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const { explainContent } = useGPTSystem();
 
   const filteredProblems = sampleProblems.filter(problem => {
     const matchesCategory = !selectedCategory || problem.tags.includes(selectedCategory);
@@ -158,14 +161,13 @@ export const ProblemsSection = () => {
                     <Badge className={getStatusColor(problem.status)}>
                       {problem.status}
                     </Badge>
-                    <Button
-                      variant="ghost"
-                      size="sm"
+                    <GPTExplainerButton
+                      content={problem.description}
+                      context={`Problem: ${problem.title}`}
+                      onExplain={(content, context) => explainContent(content, context)}
+                      variant="minimal"
                       className="opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <Brain className="w-4 h-4 mr-1" />
-                      GPT
-                    </Button>
+                    />
                   </div>
                   <CardTitle className="text-lg leading-tight">{problem.title}</CardTitle>
                   <CardDescription className="text-sm leading-relaxed">
